@@ -16,7 +16,6 @@ export const getArticlesList = async (offset = 0) => {
   if (response.statusText !== '') {
     throw new Error('ошибка обработки данных')
   }
-
   return response.data
 }
 

@@ -3,12 +3,10 @@ import { useForm, useFieldArray } from 'react-hook-form'
 import { useEffect, useState } from 'react'
 import { Button } from 'antd'
 import { useDispatch, useSelector } from 'react-redux'
-import { fetchGetNewArticle, fetchEditOwnArticle, updateSendPost } from '../../../redux/blogSlice/articlesSlice'
+import { fetchGetNewArticle, fetchEditOwnArticle } from '../../../redux/blogSlice/articlesSlice'
 import { useNavigate } from 'react-router-dom'
-import { updateIsEdit } from '../../../redux/blogSlice/userSlice'
 
 const NewFormPost = ({ title, titleArticle, description, body, tagList, slug }) => {
-  console.log('NewFormPost slug', slug)
   const [tags, setTags] = useState([''])
   const dispatch = useDispatch()
   const navigate = useNavigate()
@@ -46,31 +44,14 @@ const NewFormPost = ({ title, titleArticle, description, body, tagList, slug }) 
     }
 
     if (slug) {
-      console.log(slugData, 'slugData')
       dispatch(fetchEditOwnArticle(slugData))
     } else {
       dispatch(fetchGetNewArticle(validData))
-      // dispatch(updateSendPost())
     }
   }
 
-  // useEffect(() => {
-  //   if (sendPost) {
-  //     dispatch(updateSendPost())
-  //   }
-  //   if (editPost) {
-  //     dispatch(updateIsEdit())
-  //   }
-  // }, [])
-
   useEffect(() => {
     sendPost ? navigate('/', { replace: true }) : editPost && navigate('/', { replace: true })
-    // if (sendPost) {
-    //   dispatch(updateSendPost())
-    // }
-    // if (editPost) {
-    //   dispatch(updateIsEdit())
-    // }
   }, [sendPost, editPost])
 
   const { fields, append, remove } = useFieldArray({
@@ -99,7 +80,6 @@ const NewFormPost = ({ title, titleArticle, description, body, tagList, slug }) 
         <label className={styles.label}>
           <span className={styles.labelSpan}>Short description</span>
           <input
-            // id="inputTitle"
             className={styles.input}
             type="text"
             placeholder="Title"
@@ -169,32 +149,6 @@ const NewFormPost = ({ title, titleArticle, description, body, tagList, slug }) 
               Add tag
             </Button>
           </div>
-          {/* {tags.map((btn, index) => (
-            <div className={styles.wrapperSend} key={index}>
-              <input
-                type="text"
-                placeholder="Tag"
-                value={btn}
-                className={styles.inputTag}
-                onChange={(e) => handleTagChange(e, index)}
-                // {...register('tag', {
-                //   required: false,
-                //   maxLength: { value: 3000, message: 'Максимум 3000 символов' },
-                //   minLength: { value: 3, message: 'Минимум 3 символа' },
-                // })}
-              />
-              {tags.length > 1 && (
-                <button type="button" className={styles.wrapperBtnDel} onClick={() => handleDeleteBtn(index)}>
-                  Delete
-                </button>
-              )}
-              {tags.length - 1 === index && tags.length < 4 && (
-                <button type="button" className={styles.wrapperBtnAdd} onClick={handleAddBtn}>
-                  Add tag
-                </button>
-              )}
-            </div>
-          ))} */}
           <button type="submit" className={styles.send} disabled={!isValid}>
             Send
           </button>

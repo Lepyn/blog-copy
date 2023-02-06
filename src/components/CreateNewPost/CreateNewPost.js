@@ -4,11 +4,6 @@ import { useParams } from 'react-router-dom'
 import styles from './CreateNewPost.module.scss'
 
 const CreateNewPost = () => {
-  // const { article } = useSelector((state) => state.posts)
-  // const article = posts.article
-  // console.log(posts, 'article CreateNewPost')
-  // const { slug } = useParams()
-
   return (
     <div className={styles.containerNewPost}>
       <NewFormArticle>

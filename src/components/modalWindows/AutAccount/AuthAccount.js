@@ -36,13 +36,6 @@ const AuthAccount = () => {
     }
   }, [isAuth])
 
-  // if (isAuth || isReg) {
-  //   return children
-  // }
-  // if (!isAuth || !isReg) {
-  //   return <Navigate to="../sign-in" />
-  // }
-
   return (
     <div className={styles.wrapper}>
       <div className={styles.title}>

@@ -4,8 +4,6 @@ import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchUserRegistration } from '../../../redux/blogSlice/userSlice'
 import { useNavigate, Link } from 'react-router-dom'
-// import { isRejectedWithValue } from '@reduxjs/toolkit'
-// import { getUserRegistration } from '../../../services/userServise'
 
 const CreateAccount = () => {
   const {
@@ -17,7 +15,6 @@ const CreateAccount = () => {
   } = useForm({
     mode: 'onBlur',
   })
-  // console.log(isRejectedWithValue)
 
   const dispatch = useDispatch()
   const { isReg, error, status } = useSelector((state) => state.user)

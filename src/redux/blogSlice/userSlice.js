@@ -65,9 +65,10 @@ const getUserSlice = createSlice({
       state.user = payload.user
       // state.error = payload.error
     },
-    [fetchUserRegistration.rejected]: (state) => {
+    [fetchUserRegistration.rejected]: (state, { payload }) => {
       state.status = 'rejected'
       state.error = 'Такой пользователь уже есть! Измените данные'
+      // state.error = payload
     },
     [fetchUserGetAuth.pending]: (state) => {
       state.status = true

@@ -95,12 +95,10 @@ const getpostSlice = createSlice({
       state.error = payload
     },
     [fetchFullArticle.pending]: (state, action) => {
-      console.log('action', action)
       state.status = 'Loading'
       state.error = null
     },
     [fetchFullArticle.fulfilled]: (state, { payload }) => {
-      console.log('fetchFullArticle payload', payload)
       state.status = 'Resolved'
       state.article = payload?.article
     },

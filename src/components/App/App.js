@@ -1,5 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect } from 'react'
+import '@fontsource/source-sans-pro'
 import PostList from '../PostList/PostList'
 import { Routes, Route, Navigate } from 'react-router-dom'
 import CreateAccount from '../modalWindows/CreateAccount/CreateAccount'
@@ -10,9 +11,6 @@ import FullPost from '../modalWindows/FullPost/FullPost'
 import Layout from '../Layout/Layout'
 import EditAccount from '../modalWindows/EditAccount/EditAccount'
 import { fetchHoldUserAfterUpdate } from '../../redux/blogSlice/userSlice'
-import '@fontsource/source-sans-pro'
-
-// import NewFormPost from '../modalWindows/CreateNewPost/NewFormPost'
 
 const App = () => {
   const dispatch = useDispatch()

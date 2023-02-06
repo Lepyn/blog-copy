@@ -2,17 +2,16 @@
 import axios from 'axios'
 
 const _baseURL = 'https://blog.kata.academy/api'
-export const getUserRegistration = async (isValidData) => {
+export const getUserRegistration = async (isValidData, { rejectWithValue }) => {
   try {
     const response = await axios.post(`${_baseURL}/users`, isValidData)
     !localStorage.getItem('token') && localStorage.setItem('token', response.data.user.token)
 
     return response.data
   } catch (error) {
-    console.log(error.response.status)
-    if (error.response && error.response.status === 422) {
-      throw error
-    }
+    // if (error.response && error.response.status === 422) {
+    console.log(error, 'error')
+    return rejectWithValue('ошибка')
   }
 }
 

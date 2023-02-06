@@ -6,10 +6,9 @@ import { message, Popconfirm, Button } from 'antd'
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect, useState } from 'react'
 import { fetchFullArticle, fetchLikeArticle } from '../../redux/blogSlice/articlesSlice'
-// import avatar from '../../img/'
+
 const PostItem = ({ article }) => {
   const { slug, title, description, author, createdAt, tagList, favorited, favoritesCount, body } = article
-  console.log(author, 'author PostItem')
   const [like, setLike] = useState(favorited)
   const [count, setCount] = useState(favoritesCount)
 
@@ -59,7 +58,6 @@ const PostItem = ({ article }) => {
             )}
             <span className={styles.countLike}>{count}</span>
           </div>
-          {/* style={tagList.length ? { display: 'flex' } : { display: 'none' }} */}
           <ul className={styles.wrapTagList}>
             {tagList.map((tag, index) => (
               <li className={styles.tag} key={index}>

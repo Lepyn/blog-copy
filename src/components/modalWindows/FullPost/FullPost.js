@@ -9,39 +9,13 @@ import ReactMarkdown from 'react-markdown'
 import { message, Popconfirm } from 'antd'
 
 const FullPost = () => {
-  // console.log(props, 'FullPost PROPS')
   const location = useLocation()
   const { slug } = useParams()
   const { username } = useSelector((state) => state.user.user)
   const { isAuth } = useSelector((state) => state.user)
-  const { posts } = useSelector((state) => state)
 
-  console.log(posts, 'posts FullPost')
-  console.log(isAuth)
   const { author, title, description, createdAt, favoritesCount, tagList, body, favorited } = location.state
-  // const { author, title, description, createdAt, favoritesCount, tagList, body, favorited } = useSelector((state) => {
-  //   console.log('stateeeee', state)
-  //   return state.posts.article
-  // })
-
-  // const { author, title, description, createdAt, favoritesCount, tagList, body, favorited } = useSelector((state) => state.posts.article)
-
-  console.log(title)
-  // const {
-  //   posts: { article },
-  // } = useSelector((state) => state.posts.article)
-
-  // const { article } = posts
-  // const { title, description, createdAt, favoritesCount, tagList, body, favorited } = article
-  console.log(title, 'title')
-  // const mapArticles = posts.articles.filter((el) => {
-
-  // } el.slug === slug)
-  // const { author, title, description, createdAt, favoritesCount, tagList, body, favorited } = mapArticles
-  // console.log(article, 'articlesCount v FullPost')
-
   const navigate = useNavigate()
-  // const { slug } = useParams()
   const dispatch = useDispatch()
 
   const [like, setLike] = useState(favorited)
@@ -53,7 +27,6 @@ const FullPost = () => {
   }
 
   useEffect(() => {
-    console.log('slug slug', slug)
     if (slug) {
       dispatch(fetchFullArticle(slug))
     }
