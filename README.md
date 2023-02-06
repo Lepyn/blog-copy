@@ -1,1 +1,1 @@
-Мой проект. Николай, [нажмите сюда,]пожалуйста(https://blog-platforrm.vercel.app/)
+Мой проект. Николай, [нажмите сюда](https://blog-platforrm.vercel.app/)
