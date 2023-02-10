@@ -1,15 +1,18 @@
 import styles from './Layout.module.scss'
 import { Link, Outlet } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { updateLogout, updateIsEdit } from '../../redux/blogSlice/userSlice'
-import { updateSendPost } from '../../redux/blogSlice/articlesSlice'
+import { updateLogout, updateIsEdit, currentImg } from '../../redux/blogSlice/userSlice'
 import avatar from '../../img/avatar.png'
+import { path } from '../../assets/path'
 
 const Layout = () => {
   const dispatch = useDispatch()
   const { isAuth } = useSelector((state) => state.user)
   const { username, image } = useSelector((state) => state.user.user)
-
+  const checkOurPhoto = () => {
+    dispatch(currentImg())
+    alert('Ошибка во время загрузки изображения, не верная ссылка!')
+  }
   return (
     <>
       <header className={styles.containerHeader}>
@@ -18,21 +21,21 @@ const Layout = () => {
         </Link>
         {!isAuth ? (
           <div className={styles.containerBtn}>
-            <Link to="/sign-in" className={styles.signInBtn}>
+            <Link to={`/${path.signIn}`} className={styles.signInBtn}>
               sign-in
             </Link>
-            <Link to="/sign-up" className={styles.signUpBtn}>
+            <Link to={`/${path.signUp}`} className={styles.signUpBtn}>
               sign-up
             </Link>
           </div>
         ) : (
           <div className={styles.containerProfile}>
-            <Link to="new-article" className={styles.createArticle}>
+            <Link to={`${path.newArticle}`} className={styles.createArticle}>
               create Article
             </Link>
-            <Link to="/profile" onClick={updateIsEdit()} className={styles.headerAuth}>
+            <Link to={`/${path.profile}`} onClick={() => dispatch(updateIsEdit())} className={styles.headerAuth}>
               <span className={styles.userName}>{username}</span>
-              <img className={styles.imgProfile} src={image || avatar} />
+              <img onError={checkOurPhoto} className={styles.imgProfile} src={image || avatar} />
             </Link>
             <Link to="/" onClick={() => dispatch(updateLogout())} className={styles.logOut}>
               Log out

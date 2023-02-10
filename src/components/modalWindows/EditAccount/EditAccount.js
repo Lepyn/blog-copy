@@ -4,11 +4,12 @@ import { useForm } from 'react-hook-form'
 import { useNavigate, Link } from 'react-router-dom'
 import { fetchUpdateUserData } from '../../../redux/blogSlice/userSlice'
 import { useEffect } from 'react'
+import { path } from '../../../assets/path'
 
 const EditAccount = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
-
+  const { username, email, image } = useSelector((state) => state.user.user)
   const {
     register,
     formState: { errors, isValid },
@@ -38,6 +39,7 @@ const EditAccount = () => {
       navigate('/', { replace: true })
     }
   }, [update])
+  console.log(update, 'update')
 
   return (
     <div className={styles.wrapper}>
@@ -51,6 +53,7 @@ const EditAccount = () => {
             type="text"
             className={styles.input}
             placeholder="Username"
+            defaultValue={username}
             {...register('Username', {
               required: 'Поле обязательно для заполнения',
               maxLength: { value: 20, message: 'Максимум 20 символов' },
@@ -65,6 +68,7 @@ const EditAccount = () => {
           <input
             className={styles.input}
             placeholder=" Email address"
+            defaultValue={email}
             {...register('Emailaddress', {
               required: 'Поле обязательно для заполнения',
               pattern: {
@@ -97,6 +101,7 @@ const EditAccount = () => {
             type="text"
             placeholder="Avatar image"
             className={styles.input}
+            defaultValue={image}
             {...register('image', {
               pattern: {
                 value: /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_+.~#?&//=]*)/,
@@ -113,7 +118,7 @@ const EditAccount = () => {
         </button>
       </form>
       <span className={styles.already}>
-        Already have an account? <Link to="/sign-in">Sign In</Link>.
+        Already have an account? <Link to={`/${path.signIn}`}>Sign In</Link>.
       </span>
     </div>
   )

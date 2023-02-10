@@ -11,7 +11,7 @@ import FullPost from '../modalWindows/FullPost/FullPost'
 import Layout from '../Layout/Layout'
 import EditAccount from '../modalWindows/EditAccount/EditAccount'
 import { fetchHoldUserAfterUpdate } from '../../redux/blogSlice/userSlice'
-
+import { path } from '../../assets/path'
 const App = () => {
   const dispatch = useDispatch()
   const { isAuth, isReg } = useSelector((state) => state.user)
@@ -30,19 +30,34 @@ const App = () => {
   const PrivateRoute = ({ children }) => {
     return isReg || isAuth ? children : <Navigate to="../sign-in" />
   }
+  console.log(isReg, isAuth)
   return (
     <div>
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<PostList />} />
-          <Route index path="articles" element={<PostList />} />
-          <Route path="articles/:slug" element={<FullPost />} />
-          <Route path="sign-in" element={<LoginAccount />} />
-          <Route path="sign-up" element={<CreateAccount />} />
-          <Route path="profile" element={<EditAccount />} />
-          <Route path="articles/:slug/edit" element={<EditPost />} />
+          <Route index path={`${path.articles}`} element={<PostList />} />
+          <Route path={`${path.articles}/:slug`} element={<FullPost />} />
+          <Route path={`${path.signIn}`} element={<LoginAccount />} />
+          <Route path={`${path.signUp}`} element={<CreateAccount />} />
           <Route
-            path="new-article"
+            path={`${path.profile}`}
+            element={
+              <PrivateRoute>
+                <EditAccount />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path={`${path.articles}/:slug/edit`}
+            element={
+              <PrivateRoute>
+                <EditPost />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path={`${path.newArticle}`}
             element={
               <PrivateRoute>
                 <CreateNewPost />

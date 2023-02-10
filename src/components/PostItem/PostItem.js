@@ -5,12 +5,18 @@ import { HeartFilled, HeartOutlined } from '@ant-design/icons'
 import { message, Popconfirm, Button } from 'antd'
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect, useState } from 'react'
+import { currentImg } from '../../redux/blogSlice/userSlice'
 import { fetchFullArticle, fetchLikeArticle } from '../../redux/blogSlice/articlesSlice'
+import { path } from '../../assets/path'
 
 const PostItem = ({ article }) => {
   const { slug, title, description, author, createdAt, tagList, favorited, favoritesCount, body } = article
   const [like, setLike] = useState(favorited)
   const [count, setCount] = useState(favoritesCount)
+  const { image } = useSelector((state) => state.user.user)
+  const checkOurPhoto = () => {
+    dispatch(currentImg())
+  }
 
   const { isAuth, isReg } = useSelector((state) => state.user)
 
@@ -33,7 +39,7 @@ const PostItem = ({ article }) => {
         <div className={styles.postInfo}>
           <div className={styles.postArticle}>
             <Link
-              to={`/articles/${slug}`}
+              to={`/${path.articles}/${slug}`}
               state={{
                 slug: slug,
                 author: author,
@@ -51,10 +57,10 @@ const PostItem = ({ article }) => {
             </Link>
             {isAuth || isReg ? (
               <Button className={styles.like} disabled={!isAuth} onClick={handleLike}>
-                {like ? <HeartFilled style={{ color: '#FF0707' }} /> : <HeartOutlined />}
+                {like ? <HeartFilled className={styles.heartFilled} /> : <HeartOutlined />}
               </Button>
             ) : (
-              <HeartOutlined style={{ marginLeft: '10px' }} />
+              <HeartOutlined className={styles.heartOutlined} />
             )}
             <span className={styles.countLike}>{count}</span>
           </div>
@@ -72,7 +78,7 @@ const PostItem = ({ article }) => {
             <div className={styles.userName}>{author.username}</div>
             <p className={styles.datePost}>{formatData(createdAt)}</p>
           </div>
-          <img className={styles.userAvatar} src={author?.image} />
+          <img onError={checkOurPhoto} className={styles.userAvatar} src={author?.image} />
         </div>
       </li>
     </>

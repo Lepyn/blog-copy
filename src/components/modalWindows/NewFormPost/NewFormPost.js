@@ -71,8 +71,6 @@ const NewFormPost = ({ title, titleArticle, description, body, tagList, slug }) 
             placeholder="Title"
             {...register('title', {
               required: 'Поле обязательно для заполнения',
-              maxLength: { value: 50, message: 'Максимум 50 символов' },
-              minLength: { value: 3, message: 'Минимум 3 символа' },
             })}
           ></input>
           <div className={styles.error}>{errors?.title && <p>{errors?.title?.message || 'Error!'}</p>}</div>
@@ -85,8 +83,6 @@ const NewFormPost = ({ title, titleArticle, description, body, tagList, slug }) 
             placeholder="Title"
             {...register('description', {
               required: 'Поле обязательно для заполнения',
-              maxLength: { value: 300, message: 'Максимум 300 символов' },
-              minLength: { value: 3, message: 'Минимум 3 символа' },
             })}
           ></input>
           <div className={styles.error}>{errors?.description && <p>{errors?.description?.message || 'Error!'}</p>}</div>
@@ -99,8 +95,6 @@ const NewFormPost = ({ title, titleArticle, description, body, tagList, slug }) 
             placeholder="Text"
             {...register('body', {
               required: 'Поле обязательно для заполнения',
-              maxLength: { value: 1000, message: 'Максимум 1000 символов' },
-              minLength: { value: 3, message: 'Минимум 3 символа' },
             })}
           ></input>
           <div className={styles.error}>{errors?.body && <p>{errors?.body?.message || 'Error!'}</p>}</div>
@@ -120,7 +114,7 @@ const NewFormPost = ({ title, titleArticle, description, body, tagList, slug }) 
                       required: 'The tag must not be empty, fill in or delete',
                       pattern: {
                         value: /^[a-zA-Z0-9]+$/,
-                        message: 'You can only use English letters and numbers without spaces or other characters',
+                        message: 'Возможно использовать только английские буквы  или цифры без пробелов и прочих символов',
                       },
                       validate: (tagInputValue) =>
                         !getValues()

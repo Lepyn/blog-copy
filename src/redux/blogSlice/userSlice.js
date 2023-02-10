@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import { getUserRegistration, getUserAuth, updateUserData, holdUserAfterUpdate } from '../../services/userServise'
-
+import avatar from '../../img/avatar.png'
 export const fetchUserRegistration = createAsyncThunk('user/fetchRegistrationUser', async (isValidData, { rejectWithValue }) => {
   return await getUserRegistration(isValidData, { rejectWithValue })
 })
@@ -50,6 +50,9 @@ const getUserSlice = createSlice({
     updateIsEdit(state) {
       state.update = false
     },
+    currentImg(state) {
+      state.user.image = avatar
+    },
   },
   extraReducers: {
     [fetchUserRegistration.pending]: (state) => {
@@ -79,6 +82,7 @@ const getUserSlice = createSlice({
       state.user = payload.user
       state.status = false
       state.isAuth = true
+      state.isReg = true
     },
     [fetchUpdateUserData.pending]: (state) => {
       state.status = true
@@ -88,6 +92,8 @@ const getUserSlice = createSlice({
     [fetchUpdateUserData.fulfilled]: (state, { payload }) => {
       state.status = false
       state.update = true
+      state.isAuth = true
+      state.isReg = true
       state.user = payload.user
     },
     [fetchHoldUserAfterUpdate.fulfilled]: (state, { payload }) => {
@@ -99,6 +105,6 @@ const getUserSlice = createSlice({
   },
 })
 
-export const { updateLogout, updateIsEdit } = getUserSlice.actions
+export const { updateLogout, updateIsEdit, currentImg } = getUserSlice.actions
 
 export default getUserSlice.reducer

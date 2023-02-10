@@ -4,7 +4,7 @@ import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchUserGetAuth } from '../../../redux/blogSlice/userSlice'
 import { useNavigate, Link } from 'react-router-dom'
-
+import { path } from '../../../assets/path'
 const AuthAccount = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
@@ -78,7 +78,7 @@ const AuthAccount = () => {
         </button>
       </form>
       <span className={styles.already}>
-        Don’t have an account? <Link to={'/sign-up'}>Sign Up.</Link>
+        Don’t have an account? <Link to={`/${path.signUp}`}>Sign Up.</Link>
       </span>
     </div>
   )

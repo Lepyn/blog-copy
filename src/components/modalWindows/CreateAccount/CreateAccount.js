@@ -4,6 +4,7 @@ import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchUserRegistration } from '../../../redux/blogSlice/userSlice'
 import { useNavigate, Link } from 'react-router-dom'
+import { path } from '../../../assets/path'
 
 const CreateAccount = () => {
   const {
@@ -124,7 +125,7 @@ const CreateAccount = () => {
       </form>
 
       <span className={styles.already}>
-        Already have an account? <Link to={'/sign-in'}>Sign In.</Link>
+        Already have an account? <Link to={`/${path.signIn}`}>Sign In.</Link>
       </span>
     </div>
   )
